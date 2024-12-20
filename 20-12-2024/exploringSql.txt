@@ -1,0 +1,237 @@
+select *from table1;
++------+--------+-------+-------------+-----------+--------+
+| sno  | sname  | marks | city        | mobile    | gender |
++------+--------+-------+-------------+-----------+--------+
+|    1 | Sasha  |    89 | hyd         |  98000846 | F      |
+|    1 | harini |    99 | mumbai      | 980055676 | F      |
+|    4 | Rani   |    90 | kochi       |    435676 | F      |
+|    3 | Ram    |    59 | kolkata     |     93256 | M      |
+|    5 | Rana   |    87 | delhi       |    335676 | F      |
+|    6 | Rami   |    86 | kerala      |     96589 | M      |
+|    7 | Ramesh |    90 | agra        |     96449 | F      |
+|    8 | Prur   |    97 | andaman     |    943349 | M      |
+|    9 | Prayag |    78 | Kashmir     |    654979 | M      |
+|   10 | muna   |    99 | Uttarakhand |     53426 | F      |
+|   11 | Nina   |    79 | Hyd         |    787644 | M      |
+|   12 | Ninu   |    88 | Delhi       |    734544 | F      |
++------+--------+-------+-------------+-----------+--------+
+
+
+1) select *from table1 where city='Hyd';
++------+-------+-------+------+----------+--------+
+| sno  | sname | marks | city | mobile   | gender |
++------+-------+-------+------+----------+--------+
+|    1 | Sasha |    89 | hyd  | 98000846 | F      |
+|   11 | Nina  |    79 | Hyd  |   787644 | M      |
++------+-------+-------+------+----------+--------+
+2 rows in set (0.00 sec)
+-------------------------
+
+
+2)select * from table1 where city in ('Delhi', 'Hyd')
+    -> ;
++------+-------+-------+-------+----------+--------+
+| sno  | sname | marks | city  | mobile   | gender |
++------+-------+-------+-------+----------+--------+
+|    1 | Sasha |    89 | hyd   | 98000846 | F      |
+|    5 | Rana  |    87 | delhi |   335676 | F      |
+|   11 | Nina  |    79 | Hyd   |   787644 | M      |
+|   12 | Ninu  |    88 | Delhi |   734544 | F      |
++------+-------+-------+-------+----------+--------+
+
+--------------------------------
+
+3)
+select * from table1 where (city = 'Hyd' AND gender = 'F')   OR (city = 'delhi' AND gender = 'M')   OR city = 'Kerala';
++------+-------+-------+--------+----------+--------+
+| sno  | sname | marks | city   | mobile   | gender |
++------+-------+-------+--------+----------+--------+
+|    1 | Sasha |    89 | hyd    | 98000846 | F      |
+|    6 | Rami  |    86 | kerala |    96589 | M      |
++------+-------+-------+--------+----------+--------+
+2 rows in set (0.00 sec)
+
+-------------------------------
+
+4)
+
+ Select *from table1 where (city='hyd' AND gender='M' AND marks>=70) OR (city='hyd' AND gender='F' AND marks>=50);
++------+-------+-------+------+----------+--------+
+| sno  | sname | marks | city | mobile   | gender |
++------+-------+-------+------+----------+--------+
+|    1 | Sasha |    89 | hyd  | 98000846 | F      |
+|   11 | Nina  |    79 | Hyd  |   787644 | M      |
++------+-------+-------+------+----------+--------+
+2 rows in set (0.00 sec)
+
+
+------------------------------
+
+5)
+ Select *from table1 where (city='hyd' AND 50<=marks<=90) OR (city='kochi' AND 50<=marks<=90);
++------+-------+-------+-------+----------+--------+
+| sno  | sname | marks | city  | mobile   | gender |
++------+-------+-------+-------+----------+--------+
+|    1 | Sasha |    89 | hyd   | 98000846 | F      |
+|    4 | Rani  |    90 | kochi |   435676 | F      |
+|   11 | Nina  |    79 | Hyd   |   787644 | M      |
++------+-------+-------+-------+----------+--------+
+3 rows in set (0.00 sec)
+
+-------------------------------
+
+6)select *from table1 where sname like 's%a';
++------+-------+-------+------+----------+--------+
+| sno  | sname | marks | city | mobile   | gender |
++------+-------+-------+------+----------+--------+
+|    1 | Sasha |    89 | hyd  | 98000846 | F      |
++------+-------+-------+------+----------+--------+
+
+-------------------------------------
+
+7)
+
+select city, count(*) as number_of_students from table1 group by city;
++-------------+--------------------+
+| city        | number_of_students |
++-------------+--------------------+
+| agra        |                  1 |
+| andaman     |                  1 |
+| delhi       |                  2 |
+| hyd         |                  2 |
+| Kashmir     |                  1 |
+| kerala      |                  1 |
+| kochi       |                  1 |
+| kolkata     |                  1 |
+| mumbai      |                  1 |
+| Uttarakhand |                  1 |
++-------------+--------------------+
+10 rows in set (0.00 sec)
+
+-----------------------------------------
+
+8)SELECT city, AVG(marks) as average_marks from table1 group by city order by average_marks desc limit 5;
++-------------+---------------+
+| city        | average_marks |
++-------------+---------------+
+| Uttarakhand |       99.0000 |
+| mumbai      |       99.0000 |
+| andaman     |       97.0000 |
+| agra        |       90.0000 |
+| kochi       |       90.0000 |
++-------------+---------------+
+5 rows in set (0.00 sec)
+
+-------------------------------------------
+
+9) select city, MAX(marks) as top_score from table1 group by city;
++-------------+-----------+
+| city        | top_score |
++-------------+-----------+
+| agra        |        90 |
+| andaman     |        97 |
+| delhi       |        88 |
+| hyd         |        89 |
+| Kashmir     |        78 |
+| kerala      |        86 |
+| kochi       |        90 |
+| kolkata     |        59 |
+| mumbai      |        99 |
+| Uttarakhand |        99 |
++-------------+-----------+
+10 rows in set (0.00 sec)
+
+--------------------------------------------
+10) SELECT sno, sname, marks, city, mobile, gender
+    -> from table1
+    -> where city='hyd'
+    -> order by marks desc
+    -> limit 1;
++------+-------+-------+------+----------+--------+
+| sno  | sname | marks | city | mobile   | gender |
++------+-------+-------+------+----------+--------+
+|    1 | Sasha |    89 | hyd  | 98000846 | F      |
++------+-------+-------+------+----------+--------+
+1 row in set (0.00 sec)
+
+-----------------------------------------------
+
+
+
+interactions with two tables:
+
+TABLE 1:create table salesperson(Snum int NOT NULL,
+    -> sname varchar(30) NOT NULL,
+    -> city varchar(30) NOT NULL,
+    -> com DECIMAL(4,2) NOT NULL,
+    -> primary key(snum));
+ select *from salesperson;
++------+--------+-----------+------+
+| Snum | sname  | city      | com  |
++------+--------+-----------+------+
+| 1001 | Peel   | London    | 0.12 |
+| 1002 | Serres | San Jose  | 0.13 |
+| 1004 | Motika | London    | 0.11 |
+| 1005 | Fran   | London    | 0.26 |
+| 1007 | Rifkin | Barcelona | 0.15 |
++------+--------+-----------+------+
+5 rows in set (0.00 sec)
+
+
+TABLE 2:create table customer(
+    -> cnum int NOT NULL,
+    -> cname varchar(30) NOT NULL,
+    -> city varchar(30) NOT NULL,
+    -> rating int not null,
+    -> snum int not null,
+    -> primary key(cnum),
+    -> foreign key(snum) references salesperson(snum));
+
+
+
+select *from customer;
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    200 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1002 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2007 | Pereria  | Rome     |    100 | 1004 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+
+
+1)Find the number of customers for each salesperson
+
+ SELECT snum, COUNT(*) AS number_of_customers FROM customer GROUP BY snum;
++------+---------------------+
+| snum | number_of_customers |
++------+---------------------+
+| 1001 |                   2 |
+| 1002 |                   2 |
+| 1003 |                   1 |
+| 1004 |                   1 |
+| 1007 |                   1 |
++------+---------------------+
+5 rows in set (0.00 sec)
+
+--------------------------------------------------
+
+2)Best salesperson based on customer rating
+
+SELECT s.sname, s.snum, SUM(c.rating) AS total_rating
+    -> FROM customer c
+    -> JOIN salesperson s ON c.snum = s.snum
+    -> GROUP BY s.snum
+    -> ORDER BY total_rating DESC
+    -> LIMIT 1;
++--------+------+--------------+
+| sname  | snum | total_rating |
++--------+------+--------------+
+| Serres | 1002 |          500 |
++--------+------+--------------+
+1 row in set (0.00 sec)

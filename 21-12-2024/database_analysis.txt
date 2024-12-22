@@ -1,0 +1,437 @@
+SOLVING PROBLEMS ON DATABASE AS A TEAM OF 2:
+
+1. Create database:
+
+   create database cvr;
+2. Connect with database
+
+   use cvr;
+
+3. view all the tables in cvr database
+    show tables;
+
+   
+   Student:
+    Sno
+    Sname
+    marks
+    city
+    mobile
+    gender
+create table student(sno int, sname varchar(20), marks int, city varchar(20), mobile int, gender varchar(20));
+
+insert into student values(1,'GUNJA SRIKANTH',90,'Hyderabad',90023223,'male');
+insert into student values(2,'DASARI SUPRIYA',34,'Hyderabad',90023223,'female');
+insert into student values(3,'VARKALA TEJASRI',50,'Pune',90023223,'female');
+insert into student values(4,'LAVOORI VARSHITHA',78,'bglr',90023223,'female');
+insert into student values(5,'EDUNURI BHAVIKA',10,'Pune',90023223,'female');
+insert into student values(6,'BEJAGAM CHETHAN TEJA',54,'Pune',90023223,'male');
+insert into student values(7,'C PRADEEP',95,'Hyderabad',90023223,'male');
+insert into student values(8,'RACHAPALLY NIKHITHA',87,'bglr',90023223,'female');
+insert into student values(9,'MANDLA NIKHITHA',82,'Hyderabad',90023223,'female');
+insert into student values(10,'BATTULA RAM GOPAL',90,'Hyderabad',90023223,'male');
+insert into student values(11,'BHUKYA SRIDHAR',77,'Pune',90023223,'male');
+insert into student values(12,'SHIVA KUMAR',75,'Pune',90023223,'male');
+insert into student values(13,'MOUNIKA',75,'Pune',90023223,'female');
+
+mysql> select * from student;
++------+----------------------+-------+-----------+----------+--------+
+| sno  | sname                | marks | city      | mobile   | gender |
++------+----------------------+-------+-----------+----------+--------+
+|    1 | GUNJA SRIKANTH       |    90 | Hyderabad | 90023223 | male   |
+|    2 | DASARI SUPRIYA       |    34 | Hyderabad | 90023223 | female |
+|    3 | VARKALA TEJASRI      |    50 | Pune      | 90023223 | female |
+|    4 | LAVOORI VARSHITHA    |    78 | bglr      | 90023223 | female |
+|    5 | EDUNURI BHAVIKA      |    10 | Pune      | 90023223 | female |
+|    6 | BEJAGAM CHETHAN TEJA |    54 | Pune      | 90023223 | male   |
+|    7 | C PRADEEP            |    95 | Hyderabad | 90023223 | male   |
+|    8 | RACHAPALLY NIKHITHA  |    87 | bglr      | 90023223 | female |
+|    9 | MANDLA NIKHITHA      |    82 | Hyderabad | 90023223 | female |
+|   10 | BATTULA RAM GOPAL    |    90 | Hyderabad | 90023223 | male   |
+|   11 | BHUKYA SRIDHAR       |    77 | Pune      | 90023223 | male   |
+|   12 | SHIVA KUMAR          |    75 | Pune      | 90023223 | male   |
+|   13 | MOUNIKA              |    75 | Pune      | 90023223 | female |
++------+----------------------+-------+-----------+----------+--------+
+
+1. Display student details whose city is Pune
+
+ans: select * from student where city='Pune'; 
+
+
+2. Display student details whose city is Hyderabad or Pune
+
+ANS: Select * from student where city='Hyderabad' or city='Pune';
+
+3. Display female students from Hyderabad and male students from Pune and all the students from bglr.
+
+select * from student where gender='female and city='Hyderabad' or gender='male' and city='Pune' or city=bglr;
+
+4. Display students details 
+ ---> from Hyderabad city, male students who scored more than 70 and female who score more than 50.
+ ---> from Pune only male students
+
+select * from student city='Hyderabad' and gender='male' and marks>=70 or gender='female' and marks>=50 and city='Hyderabad' or gender='male' and city='Pune';
+
+5. Display students details whose score between 50 and 80 and city should be Hyderabad or bglr.
+
+select * from student where marks between 50 and 80 and city in ('Hyderabad','bglr');
+
+
+6.Display student details whose name starts with S and ends with A
+
+ select * from student where sname like "S%A";
+
+7.Display number of students in each city
+
+select city, count(*) as "NO of stds" from students group by city;
+
+8.Best city in education based on score.
+
+select city, avg(marks) as "avg score" from students group by city order by "avg score" desc limit 1;
+
+9.Top score in each city
+
+select city,max(marks) as top_score from student group by city order by max(marks) desc;
+
+10. Display toper details in Hyderabad.
+
+select * from student where city='Hyderabad' order by marks desc limit 1;
+
+create database retail;
+use retail;
+
+CREATE TABLE salespeople (
+         snum    INT  NOT NULL,
+         sname VARCHAR(30)   NOT NULL,
+         city  VARCHAR(30)   NOT NULL,
+         comm  DECIMAL(4,2)  NOT NULL,
+         PRIMARY KEY  (snum)
+       );
+INSERT INTO salespeople VALUES (1001, 'Peel', 'London', 0.12);
+INSERT INTO salespeople VALUES (1002, 'Serres', 'San Jose', .13);
+INSERT INTO salespeople VALUES (1004,'Motika', 'London', .11);
+INSERT INTO salespeople VALUES (1007,'Rifkin', 'Barcelona', .15);
+INSERT INTO salespeople VALUES (1003,'AxelRod', 'New York', .10);
+INSERT INTO salespeople VALUES (1005,'Fran', 'London', .26);
+CREATE TABLE customer (
+         cnum    INT  NOT NULL,
+         cname VARCHAR(30)   NOT NULL,
+         city  VARCHAR(30)   NOT NULL,
+         rating int not null,
+         snum  int  NOT NULL,
+         PRIMARY KEY  (cnum),
+     FOREIGN KEY (snum) REFERENCES salespeople(snum));
+
+INSERT INTO customer VALUES (2001, 'Hoffman', 'London',100, 1001);
+INSERT INTO customer VALUES (2002,'Giovanni', 'Rome', 200, 1003);
+INSERT INTO customer VALUES (2003,'Liu','San Jose',200,1002);
+INSERT INTO customer VALUES (2004,'Grass', 'Berlin', 300,1002);
+INSERT INTO customer VALUES (2006,'Clemens', 'London', 100, 1001);
+INSERT INTO customer VALUES(2008,'Cisneros','San Jose',300, 1007);
+INSERT INTO customer VALUES (2007,'Pereira', 'Rome', 100 ,1004);
+
+
+Q1: Find number of customers for each salespeople
+Q2: Best Salesperson based on customer rating
+Q3: To whom we need to fire from salespeople team.
+Q4: Who has less customer rating.
+Q5. Display salespeople who has customers from same city.
+Q6. Find the names and numbers of all salespeople who had more than one customer.
+Q7.Find customers in San Jose who have a rating above 200.
+Q8. List all customers with ratings above San Jose’s average.   
+
+
+
+
+CREATE TABLE orders ( 
+         onum    INT  NOT NULL, 
+    amt  DECIMAL(7,2)  NOT NULL, 
+         odate  Date   NOT NULL, 
+ cnum  int  NOT NULL, 
+         PRIMARY KEY  (onum), 
+     FOREIGN KEY (cnum) REFERENCES customer(cnum) 
+       ); 
+
+
+
+
+INSERT INTO orders VALUES (3001, 18.69, '1996-03-10', 2008);
+INSERT INTO orders VALUES (3003, 767.19, '1996-10-03', 2001);  
+INSERT INTO orders VALUES (3002, 1900.10, '1996-10-03', 2007);  
+INSERT INTO orders VALUES (3005, 5160.45, '1996-10-03', 2003);  
+INSERT INTO orders VALUES (3006, 1098.16, '1996-10-03', 2008);  
+INSERT INTO orders VALUES (3009, 1713.23, '1996-10-04', 2002);  
+INSERT INTO orders VALUES (3007, 75.75, '1996-10-04', 2002);  
+INSERT INTO orders VALUES (3008, 4723.00, '1996-10-05', 2006);  
+INSERT INTO orders VALUES (3010, 1309.95, '1996-10-06', 2004);  
+INSERT INTO orders VALUES (3011, 9891.88, '1996-10-06', 2006);  
+
+
+
+
+
+1. Identify which salesperson has generated the highest total sales.
+2. Count how many customers are handled by each salesperson.
+3. Find out which customers have placed the most orders.
+4. Analyze the average size of orders for each salesperson's customers.
+5. Identify the customers who have spent the most money on orders.
+6. Analyze which cities (regions) generate the highest total sales.
+7. Find out which salesperson has the highest average customer rating.
+8. Calculate the percentage of customers who have placed orders for each salesperson.
+9. Calculate the total revenue generated by each customer.
+10. Identify customers who have not placed any orders.
+11. Show the percentage of total revenue generated by each salesperson.
+
+
+
+SOLUTIONS-
+
+ SELECT
+    ->     s.snum AS salesperson_id,
+    ->     s.sname AS salesperson_name,
+    ->     SUM(o.amt) AS total_sales
+    -> FROM
+    ->     salespeople s
+    -> JOIN
+    ->     customer c ON s.snum = c.snum
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     s.snum, s.sname
+    -> ORDER BY
+    ->     total_sales DESC
+    -> LIMIT 1;
++----------------+------------------+-------------+
+| salesperson_id | salesperson_name | total_sales |
++----------------+------------------+-------------+
+|           1001 | Peel             |    15382.07 |
++----------------+------------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT
+    ->     s.snum AS salesperson_id,
+    ->     s.sname AS salesperson_name,
+    ->     COUNT(c.cnum) AS customer_count
+    -> FROM
+    ->     salespeople s
+    -> LEFT JOIN
+    ->     customer c ON s.snum = c.snum
+    -> GROUP BY
+    ->     s.snum, s.sname
+    -> ORDER BY
+    ->     customer_count DESC;
++----------------+------------------+----------------+
+| salesperson_id | salesperson_name | customer_count |
++----------------+------------------+----------------+
+|           1001 | Peel             |              2 |
+|           1002 | Serres           |              2 |
+|           1007 | Rifkin           |              1 |
+|           1003 | AxelRod          |              1 |
+|           1004 | Motika           |              1 |
+|           1005 | Fran             |              0 |
++----------------+------------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT
+    ->     c.cnum AS customer_id,
+    ->     c.cname AS customer_name,
+    ->     COUNT(o.onum) AS order_count
+    -> FROM
+    ->     customer c
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     c.cnum, c.cname
+    -> ORDER BY
+    ->     order_count DESC
+    -> LIMIT 1;
++-------------+---------------+-------------+
+| customer_id | customer_name | order_count |
++-------------+---------------+-------------+
+|        2008 | Cisneros      |           2 |
++-------------+---------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT
+    ->     s.snum AS salesperson_id,
+    ->     s.sname AS salesperson_name,
+    ->     AVG(o.amt) AS average_order_size
+    -> FROM
+    ->     salespeople s
+    -> JOIN
+    ->     customer c ON s.snum = c.snum
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     s.snum, s.sname
+    -> ORDER BY
+    ->     average_order_size DESC;
++----------------+------------------+--------------------+
+| salesperson_id | salesperson_name | average_order_size |
++----------------+------------------+--------------------+
+|           1001 | Peel             |        5127.356667 |
+|           1002 | Serres           |        3235.200000 |
+|           1004 | Motika           |        1900.100000 |
+|           1003 | AxelRod          |         894.490000 |
+|           1007 | Rifkin           |         558.425000 |
++----------------+------------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT
+    ->     c.cnum AS customer_id,
+    ->     c.cname AS customer_name,
+    ->     SUM(o.amt) AS total_spent
+    -> FROM
+    ->     customer c
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     c.cnum, c.cname
+    -> ORDER BY
+    ->     total_spent DESC
+    -> LIMIT 1;
++-------------+---------------+-------------+
+| customer_id | customer_name | total_spent |
++-------------+---------------+-------------+
+|        2006 | Clemens       |    14614.88 |
++-------------+---------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT
+    ->     s.city AS city,
+    ->     SUM(o.amt) AS total_sales
+    -> FROM
+    ->     salespeople s
+    -> JOIN
+    ->     customer c ON s.snum = c.snum
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     s.city
+    -> ORDER BY
+    ->     total_sales DESC;
++-----------+-------------+
+| city      | total_sales |
++-----------+-------------+
+| London    |    17282.17 |
+| San Jose  |     6470.40 |
+| New York  |     1788.98 |
+| Barcelona |     1116.85 |
++-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT
+    ->     s.snum AS salesperson_id,
+    ->     s.sname AS salesperson_name,
+    ->     AVG(c.rating) AS average_rating
+    -> FROM
+    ->     salespeople s
+    -> JOIN
+    ->     customer c ON s.snum = c.snum
+    -> GROUP BY
+    ->     s.snum, s.sname
+    -> ORDER BY
+    ->     average_rating DESC
+    -> LIMIT 1;
++----------------+------------------+----------------+
+| salesperson_id | salesperson_name | average_rating |
++----------------+------------------+----------------+
+|           1007 | Rifkin           |       300.0000 |
++----------------+------------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT
+    ->     s.snum AS salesperson_id,
+    ->     s.sname AS salesperson_name,
+    ->     COUNT(DISTINCT o.cnum) AS customers_with_orders,
+    ->     COUNT(DISTINCT c.cnum) AS total_customers,
+    ->     ROUND((COUNT(DISTINCT o.cnum) * 100.0) / COUNT(DISTINCT c.cnum), 2) AS percentage_with_orders
+    -> FROM
+    ->     salespeople s
+    -> JOIN
+    ->     customer c ON s.snum = c.snum
+    -> LEFT JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     s.snum, s.sname
+    -> ORDER BY
+    ->     percentage_with_orders DESC;
++----------------+------------------+-----------------------+-----------------+------------------------+
+| salesperson_id | salesperson_name | customers_with_orders | total_customers | percentage_with_orders |
++----------------+------------------+-----------------------+-----------------+------------------------+
+|           1004 | Motika           |                     1 |               1 |                 100.00 |
+|           1001 | Peel             |                     2 |               2 |                 100.00 |
+|           1007 | Rifkin           |                     1 |               1 |                 100.00 |
+|           1002 | Serres           |                     2 |               2 |                 100.00 |
+|           1003 | AxelRod          |                     1 |               1 |                 100.00 |
++----------------+------------------+-----------------------+-----------------+------------------------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT
+    ->     c.cnum AS customer_id,
+    ->     c.cname AS customer_name,
+    ->     SUM(o.amt) AS total_revenue
+    -> FROM
+    ->     customer c
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     c.cnum, c.cname
+    -> ORDER BY
+    ->     total_revenue DESC;
++-------------+---------------+---------------+
+| customer_id | customer_name | total_revenue |
++-------------+---------------+---------------+
+|        2006 | Clemens       |      14614.88 |
+|        2003 | Liu           |       5160.45 |
+|        2007 | Pereira       |       1900.10 |
+|        2002 | Giovanni      |       1788.98 |
+|        2004 | Grass         |       1309.95 |
+|        2008 | Cisneros      |       1116.85 |
+|        2001 | Hoffman       |        767.19 |
++-------------+---------------+---------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT
+    ->     c.cnum AS customer_id,
+    ->     c.cname AS customer_name,
+    ->     c.city AS customer_city
+    -> FROM
+    ->     customer c
+    -> LEFT JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> WHERE
+    ->     o.cnum IS NULL;
+Empty set (0.00 sec)
+
+mysql> SELECT
+    ->     s.snum AS salesperson_id,
+    ->     s.sname AS salesperson_name,
+    ->     SUM(o.amt) AS total_revenue,
+    ->     ROUND((SUM(o.amt) / (SELECT SUM(amt) FROM orders) * 100), 2) AS percentage_of_total_revenue
+    -> FROM
+    ->     salespeople s
+    -> JOIN
+    ->     customer c ON s.snum = c.snum
+    -> JOIN
+    ->     orders o ON c.cnum = o.cnum
+    -> GROUP BY
+    ->     s.snum, s.sname
+    -> ORDER BY
+    ->     percentage_of_total_revenue DESC;
++----------------+------------------+---------------+-----------------------------+
+| salesperson_id | salesperson_name | total_revenue | percentage_of_total_revenue |
++----------------+------------------+---------------+-----------------------------+
+|           1001 | Peel             |      15382.07 |                       57.70 |
+|           1002 | Serres           |       6470.40 |                       24.27 |
+|           1004 | Motika           |       1900.10 |                        7.13 |
+|           1003 | AxelRod          |       1788.98 |                        6.71 |
+|           1007 | Rifkin           |       1116.85 |                        4.19 |
++----------------+------------------+---------------+-----------------------------+
+5 rows in set (0.01 sec)
+
+
+
+
+
+

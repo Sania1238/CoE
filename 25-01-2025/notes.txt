@@ -1,0 +1,33 @@
+GlobalLandTemperaturesByCity.csv.zip
+GolbalLandandTemperatureByCity.csv.zip
+
+
+Task-1:
+Filter the dataset for a specific city(ex:New York) and extract relevant coulmns
+Task-2:
+Plot the average(min-max)annual temperature trend for New York.(use Scatter Plot)
+
+=======================================================
+
+Seaborn-
+
+>histogram: sns.histplot()
+
+>KDE(Kernel Density Estimation):used to display the curve as in the smooth distribution data
+                        sns.kdeplot()
+
+-Categorical plots
+
+ >Bar Plot
+
+ >Box Plot
+
+ >Scatter plot
+
+==================================================
+
+Numpy-
+
+numerical array
+numpy is super fast
+contains more functions

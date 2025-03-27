@@ -1,0 +1,23 @@
+ENSEMBLE LEARNING
+Types:
+	-Bagging/Boostrap aggregation(used in conditions of overfitting)
+	-Boosting(used in conditions of underfitting)
+
+1)Bagging/Bootstrap Aggregation:
+--------------------------------
+>>can be used to reduce the variance for that alg that has high variance, typically decision tree.
+>>it makes each model run independently and aggregate in the end without any model.
+
+
+
+2)BOOSTING:
+------------
+>>It is a type of algorithm that converts weak learners to strong learners.
+>>each alg, i.e. base learners are trained sequentially and at every time the next learner is trying to reduce the error by updating the parameters, and perform better each time.
+
+	Boosting Techniques:
+	--------------------
+	-AdaBoost(Adaptive Boosting)
+	-Gradient Boosting(combines multiple weak learners to create a strong predictive model.
+	-XGBoost (combines decision trees sequentially to create a strong model. It is very fast.)
+	

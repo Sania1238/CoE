@@ -1,0 +1,70 @@
+DIMENSIONALITY REDUCTION:
+-------------------------
+-reducing the dimensions of your feature set
+-allows you to find a small set of most impactful features among large number of features
+
+	2 Types:
+	--------
+	-Feature selection method
+	-Feature extraction method
+
+----------------------------------------------------------------
+
+FEATURE EXTRACTION METHODS:
+---------------------------
+.This technique tries to reduce the number of features byb creating new features from the existing one.(discards the original features)
+
+Types:
+------
+1)PCA(Principal Component Analysis)
+2)LDA(Linear Discriminant Analysis)
+3)Kernel PCA( Kernel Principal Component Analysis)
+
+
+-----------------------------------------------------------------
+
+PCA:
+----
+
+>>PCA is a dimensionality reduction technique that transforms high-dimensional data into a lower-dimensional space while preserving the most significant variance
+
+-transforms data into new axis
+-reduces complexity of datasets
+-removes multicollinearity
+-improves the visualization and performance of ML models
+________________________________________________
+Steps to perform PCA:
+_____________________
+
+Step 1: Standardize the data
+
+Step 2: Compute Covariance Matrix
+
+Step 3: Calculate Eigen Values & Eigen Vectors
+
+Step 4: Sort and Select Components
+
+Step 5: Project the data
+
+Step 6: Explained Variance & Scree Plot
+__________________________________________________________________________________________________________________________________________
+
+
+t-SNE(C)
+==================================================
+
+-Dimensionality reduction technique
+-captures non-linear relationships in data
+-better visualization than PCA from clusters
+
+___________________________________________________
+Steps to perform t-SNE:
+_______________________
+Step 1: Standardize the data
+
+Step 2: Compute pairwise Similarities
+
+Step 3: Apply t-SNE
+
+Step 4: 
+
